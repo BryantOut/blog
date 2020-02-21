@@ -2,7 +2,7 @@
 title: p12_TypeScript 模块以及模块化封装DB库 封装类似Mongooes风格的类库类库
 tags: TypeScript
 categories: TypeScript
-date: 2020-02-21
+date: 2020-02-22
 ---
 
 [TS入门教程](https://ts.xcatliu.com/ )
@@ -73,4 +73,81 @@ tools1();
 ```
 
 ### 模块化封装上一讲的DB库
+
+**项目目录**
+
+![](/mdImg/ts14.png)
+
+`db.ts`
+
+```typescript
+interface dbInterface<T> {
+    add(info:T):boolean;
+    update(info:T,id:number):boolean;
+    delete(id:number):boolean;
+    get(id:number):any[];
+}
+
+// 定义一个操作mySql数据库，注意：要实现泛型接口，这个类也应该是一个泛型类
+export class mySql<T> implements dbInterface<T> {
+    add(info: T): boolean {
+        console.log(info);
+        return true;
+    }    
+    update(info: T, id: number): boolean {
+        throw new Error("Method not implemented.");
+    }
+    delete(id: number): boolean {
+        throw new Error("Method not implemented.");
+    }
+    get(id: number): any[] {
+        throw new Error("Method not implemented.");
+    }
+}
+
+export class msSql<T> implements dbInterface<T> {
+    add(info: T): boolean {
+        throw new Error("Method not implemented.");
+    }    
+    update(info: T, id: number): boolean {
+        throw new Error("Method not implemented.");
+    }
+    delete(id: number): boolean {
+        throw new Error("Method not implemented.");
+    }
+    get(id: number): any[] {
+        throw new Error("Method not implemented.");
+    }
+}
+```
+
+`User.ts`
+
+```typescript
+import { mySql } from "../modules/db"
+
+class UserClass {
+    public username:string;
+    public number:24;
+    constructor(username:string,number:24) {
+        this.username = username;
+        this.number = number;
+    }
+}
+
+var mySqlModule = new mySql<UserClass>();
+
+export {
+    UserClass,mySqlModule
+}
+```
+
+`index.ts`
+
+```typescript
+import { UserClass,mySqlModule } from "./module/User"
+
+var u = new UserClass("科比布莱恩特",24);
+mySqlModule.add(u);
+```
 

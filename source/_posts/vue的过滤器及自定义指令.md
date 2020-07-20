@@ -1,5 +1,5 @@
 ---
-\title: vue的过滤器【时间格式化】
+title: vue的过滤器【时间格式化】
 tags: vue
 categories: vue
 date: 2018-8-28
